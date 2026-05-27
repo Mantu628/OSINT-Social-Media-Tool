@@ -1,0 +1,92 @@
+# Core Dependencies
+Flask==2.3.3
+Flask-RESTful==0.3.10
+Flask-CORS==4.0.0
+python-dotenv==1.0.0
+
+# Web Scraping & HTTP
+requests==2.31.0
+beautifulsoup4==4.12.2
+selenium==4.13.0
+scrapy==2.11.0
+httpx==0.24.1
+aiohttp==3.9.0
+
+# Data Processing
+pandas==2.0.3
+numpy==1.24.3
+openpyxl==3.1.2
+python-dateutil==2.8.2
+
+# Database
+SQLAlchemy==2.0.20
+psycopg2-binary==2.9.7
+
+# API & Authentication
+PyJWT==2.8.0
+cryptography==41.0.3
+oauthlib==3.2.2
+
+# Data Visualization
+matplotlib==3.7.2
+plotly==5.16.1
+networkx==3.1
+pyvis==0.3.2
+
+# Natural Language Processing
+nltk==3.8.1
+textblob==0.17.1
+transformers==4.32.0
+torch==2.0.1
+
+# Report Generation
+reportlab==4.0.4
+fpdf2==2.7.0
+python-docx==0.8.11
+jinja2==3.1.2
+
+# Image Processing
+Pillow==10.0.0
+opencv-python==4.8.0.76
+
+# Geographic Data
+geopy==2.3.0
+folium==0.14.0
+
+# Configuration
+PyYAML==6.0.1
+configparser==6.0.0
+
+# Logging
+python-json-logger==2.0.7
+colorlog==6.7.0
+
+# Testing
+pytest==7.4.0
+pytest-cov==4.1.0
+pytest-asyncio==0.21.0
+requests-mock==1.11.0
+
+# Development
+black==23.9.1
+flake8==6.0.0
+pylint==2.17.5
+isort==5.12.0
+pre-commit==3.3.3
+
+# Security
+validators==0.22.0
+bleach==6.0.0
+email-validator==2.0.0
+
+# CLI & UI
+click==8.1.7
+typer==0.9.0
+rich==13.5.2
+
+# Utilities
+tqdm==4.66.1
+pydantic==2.3.0
+redis==5.0.0
+APScheduler==3.10.4
+werkzeug==2.3.7
