@@ -1,0 +1,377 @@
+# OSINT Social Media Tool Configuration
+# This file contains all configuration settings for the application
+
+# Server Configuration
+server:
+  host: 127.0.0.1
+  port: 5000
+  debug: false
+  workers: 4
+  timeout: 300
+  environment: development  # development, testing, production
+
+# Database Configuration
+database:
+  type: sqlite  # sqlite, postgresql, mysql
+  sqlite:
+    path: data/osint.db
+    timeout: 30
+    check_same_thread: false
+  postgresql:
+    host: localhost
+    port: 5432
+    user: osint_user
+    password: secure_password
+    database: osint_db
+    pool_size: 10
+  backup:
+    enabled: true
+    interval_hours: 24
+    retention_days: 30
+
+# API Keys for Enhanced Features (optional)
+api_keys:
+  twitter:
+    api_key: ""
+    api_secret: ""
+    access_token: ""
+    access_token_secret: ""
+  instagram:
+    access_token: ""
+  facebook:
+    app_id: ""
+    app_secret: ""
+    access_token: ""
+  google:
+    api_key: ""
+    search_engine_id: ""
+
+# Proxy Configuration
+proxy:
+  enabled: false
+  rotation: random  # random, sequential, round_robin
+  rotation_interval: 10  # requests before rotation
+  timeout: 30
+  list:
+    - "http://proxy1:port"
+    - "http://proxy2:port"
+  proxy_file: proxies.txt
+  validate_ssl: true
+
+# Rate Limiting Configuration
+rate_limit:
+  enabled: true
+  global:
+    requests_per_minute: 60
+    requests_per_hour: 1000
+  per_platform:
+    twitter:
+      requests_per_minute: 15
+      requests_per_hour: 450
+    instagram:
+      requests_per_minute: 20
+      requests_per_hour: 600
+    facebook:
+      requests_per_minute: 10
+      requests_per_hour: 300
+    reddit:
+      requests_per_minute: 30
+      requests_per_hour: 900
+    tiktok:
+      requests_per_minute: 25
+      requests_per_hour: 750
+  backoff_strategy: exponential  # exponential, linear, fibonacci
+  max_retries: 3
+  retry_delay: 5
+
+# Logging Configuration
+logging:
+  level: INFO  # DEBUG, INFO, WARNING, ERROR, CRITICAL
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: logs/osint.log
+  console: true
+  max_file_size: 10485760  # 10MB
+  backup_count: 5
+  handlers:
+    - type: file
+      filename: logs/osint.log
+    - type: file
+      filename: logs/errors.log
+      level: ERROR
+    - type: file
+      filename: logs/access.log
+      level: INFO
+
+# Features Configuration
+features:
+  # Scraping Features
+  user_profile_scraping: true
+  post_collection: true
+  hashtag_analysis: true
+  location_tracking: true
+  
+  # Analysis Features
+  sentiment_analysis: true
+  network_graph: true
+  geolocation: true
+  reverse_image_search: true
+  email_lookup: true
+  phone_lookup: true
+  
+  # Real-time Features
+  real_time_monitoring: false
+  keyword_alerts: true
+  
+  # Export Options
+  export_formats:
+    - csv
+    - json
+    - pdf
+    - xlsx
+    - html
+  
+  # Advanced Features
+  timeline_analysis: true
+  threat_detection: true
+  account_verification: true
+
+# Platform Configuration
+platforms:
+  twitter:
+    enabled: true
+    scrape_method: api  # api, selenium, playwright
+    timeout: 30
+    include_replies: true
+    include_retweets: true
+    max_tweets_per_user: 3200
+  
+  instagram:
+    enabled: true
+    scrape_method: selenium
+    timeout: 40
+    include_stories: true
+    include_reels: true
+    max_posts_per_user: 1000
+  
+  facebook:
+    enabled: true
+    scrape_method: api
+    timeout: 30
+    public_data_only: true
+  
+  linkedin:
+    enabled: true
+    scrape_method: api
+    timeout: 30
+    connection_required: false
+  
+  reddit:
+    enabled: true
+    scrape_method: api
+    timeout: 20
+    subreddits: []
+  
+  tiktok:
+    enabled: true
+    scrape_method: playwright
+    timeout: 35
+    max_videos_per_user: 500
+  
+  youtube:
+    enabled: true
+    scrape_method: api
+    timeout: 25
+    include_comments: true
+  
+  telegram:
+    enabled: false
+    api_id: ""
+    api_hash: ""
+    phone_number: ""
+
+# Browser Configuration (for Selenium/Playwright)
+browser:
+  type: chrome  # chrome, firefox, edge
+  headless: true
+  user_agents:
+    - "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    - "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+    - "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36"
+  window_size: [1920, 1080]
+  implicit_wait: 10
+  page_load_timeout: 30
+
+# Request Headers Configuration
+request:
+  timeout: 30
+  verify_ssl: true
+  allow_redirects: true
+  user_agent_rotation: true
+  custom_headers:
+    Accept: "application/json"
+    Accept-Language: "en-US,en;q=0.9"
+
+# Data Processing Configuration
+data_processing:
+  # Text Processing
+  remove_duplicates: true
+  remove_urls: false
+  remove_mentions: false
+  remove_hashtags: false
+  
+  # Text Cleaning
+  lowercase: false
+  remove_special_chars: false
+  remove_numbers: false
+  
+  # Batch Processing
+  batch_size: 100
+  chunk_size: 1000
+  parallel_workers: 4
+
+# Sentiment Analysis Configuration
+sentiment:
+  enabled: true
+  model: textblob  # textblob, transformers, vader
+  language: en
+  threshold:
+    positive: 0.6
+    neutral: 0.4
+    negative: 0.4
+
+# NLP Configuration
+nlp:
+  enabled: true
+  language: en
+  models:
+    - name: bert-base-uncased
+      cache: true
+    - name: roberta-base
+      cache: true
+
+# Security Configuration
+security:
+  # SSL/TLS
+  verify_ssl: true
+  cert_path: ""
+  
+  # API Security
+  require_api_key: true
+  api_key_header: "X-API-Key"
+  
+  # CORS
+  cors_origins: ["http://localhost:3000", "http://localhost:5000"]
+  cors_methods: ["GET", "POST", "PUT", "DELETE"]
+  
+  # Rate Limiting
+  enable_rate_limiting: true
+  
+  # Encryption
+  encrypt_sensitive_data: true
+  encryption_key: ""  # Generate secure key
+  
+  # Password Policy
+  password_min_length: 12
+  password_require_uppercase: true
+  password_require_lowercase: true
+  password_require_numbers: true
+  password_require_special: true
+
+# Monitoring & Alerts
+monitoring:
+  enabled: true
+  alert_email: ""
+  alert_webhook: ""
+  
+  alerts:
+    high_rate_limiting: true
+    api_failures: true
+    suspicious_activity: true
+    database_errors: true
+
+# Web UI Configuration
+web_ui:
+  theme: light  # light, dark
+  results_per_page: 50
+  max_export_size_mb: 500
+  enable_dark_mode: true
+  enable_offline_mode: false
+
+# Desktop App Configuration
+desktop:
+  window_width: 1400
+  window_height: 900
+  remember_window_state: true
+  enable_notifications: true
+  enable_tray_icon: true
+  auto_update: true
+
+# Export Configuration
+export:
+  # CSV
+  csv_delimiter: ","
+  csv_include_headers: true
+  
+  # JSON
+  json_indent: 2
+  json_include_metadata: true
+  
+  # PDF
+  pdf_page_size: A4
+  pdf_margins: 20
+  pdf_include_timestamp: true
+  
+  # Default output directory
+  output_directory: exports/
+  zip_exports: true
+
+# Search History & Cache
+cache:
+  enabled: true
+  backend: sqlite  # sqlite, redis
+  ttl_seconds: 3600
+  max_size_mb: 500
+  
+  redis:
+    host: localhost
+    port: 6379
+    db: 0
+    password: ""
+
+# Scheduler Configuration
+scheduler:
+  enabled: true
+  backend: sqlite  # sqlite, redis
+  max_concurrent_jobs: 5
+  job_store: jobs.db
+
+# Statistics & Analytics
+analytics:
+  enabled: false
+  track_searches: true
+  track_exports: true
+  track_performance: true
+  
+# Development Settings
+development:
+  debug: true
+  debug_toolbar: true
+  sql_echo: false
+  profile_requests: false
+  log_request_response: true
+
+# Testing Configuration
+testing:
+  test_database: data/test.db
+  fixtures_path: tests/fixtures/
+  test_timeout: 30
+  use_mock_api: true
+
+# Compliance & Legal
+compliance:
+  gdpr_compliant: true
+  ccpa_compliant: true
+  store_user_data: false
+  data_retention_days: 90
+  audit_logging: true
+  audit_log_file: logs/audit.log
